@@ -39,7 +39,7 @@ module.exports = function(io) {
   io.on('connection', socket => {
     socket.on('request shortid', function() {
       onlines.delete(socket.shortid);
-      socket.shortid = shortid.generate().toLowerCase(); // generate shortid for a request
+      socket.shortid = shortid.generate().toLowerCase().replace(/_|-/g, '').substring(0,3); // generate shortid for a request
       onlines.set(socket.shortid, socket); // add incomming connection to online table
       socket.emit('shortid', socket.shortid);
     });

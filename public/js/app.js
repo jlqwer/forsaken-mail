@@ -29,7 +29,7 @@ $(function(){
       self.toggleClass('edit');
       $shortId.prop('placeholder',$placeholder_old);
       $mailUser = $shortId.val();
-      var mailaddress = $mailUser + '@' + location.hostname;
+      var mailaddress = $mailUser + '@' + location.hostname.replace('mail.', '');
       setMailAddress($mailUser);
       $shortId.val(mailaddress);
       window.location.reload();
@@ -55,7 +55,7 @@ $(function(){
 
   var setMailAddress = function(id) {
     localStorage.setItem('shortid', id);
-    var mailaddress = id + '@' + location.hostname;
+    var mailaddress = id + '@' + location.hostname.replace('mail.', '');
     $('#shortid').val(mailaddress).parent().siblings('button').find('.mail').attr('data-clipboard-text', mailaddress);
   };
 
